@@ -2,6 +2,6 @@
 
 public interface IAuthenticationClient
 {
-    string GetAuthorizationUrl(IEnumerable<string> scopes, string state = null);
+    string GetAuthorizationUrl(IEnumerable<string> scopes, string? state = null);
     Task<AuthenticationResult> ExchangeCodeForTokenAsync(string code);
 }
