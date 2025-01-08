@@ -54,7 +54,51 @@ internal sealed class AuthenticationClient(
             throw new ThreadsAuthenticationException(responseContent);
         }
 
-        // Deserialize the response
         return JsonSerializer.Deserialize<AuthenticationResult>(responseContent);
+    }
+
+    public async Task<LongLivedTokenResult> ExchangeForLongLivedTokenAsync(string accessToken)
+    {
+        using var client = _httpClientFactory.CreateClient("ThreadsAuth");
+
+        var queryParams = new Dictionary<string, string>
+        {
+            ["grant_type"] = "th_exchange_token",
+            ["client_secret"] = _clientSecret,
+            ["access_token"] = accessToken
+        };
+
+        var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
+        var response = await client.GetAsync($"access_token?{queryString}");
+        var responseContent = await response.Content.ReadAsStringAsync();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ThreadsAuthenticationException(responseContent);
+        }
+
+        return JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
+    }
+
+    public async Task<LongLivedTokenResult> RefreshLongLivedTokenAsync(string longLivedToken)
+    {
+        using var client = _httpClientFactory.CreateClient("ThreadsAuth");
+
+        var queryParams = new Dictionary<string, string>
+        {
+            ["grant_type"] = "th_refresh_token",
+            ["access_token"] = longLivedToken
+        };
+
+        var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
+        var response = await client.GetAsync($"refresh_access_token?{queryString}");
+        var responseContent = await response.Content.ReadAsStringAsync();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ThreadsAuthenticationException(responseContent);
+        }
+
+        return JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
     }
 }
