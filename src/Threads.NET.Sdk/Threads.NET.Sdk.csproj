@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <Description>Threads .NET SDK</Description>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Folder Include="Authentication\" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
 </Project>
