@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.NET.Sdk.Tests", "test\Threads.NET.Sdk.Tests\Threads.NET.Sdk.Tests.csproj", "{C4B7E91B-B70A-48D7-85BA-617D02C81CC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,12 +30,17 @@ Global
 		{EA4DCBF0-E4A6-4176-A416-897CA90F82A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA4DCBF0-E4A6-4176-A416-897CA90F82A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA4DCBF0-E4A6-4176-A416-897CA90F82A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B7E91B-B70A-48D7-85BA-617D02C81CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B7E91B-B70A-48D7-85BA-617D02C81CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B7E91B-B70A-48D7-85BA-617D02C81CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B7E91B-B70A-48D7-85BA-617D02C81CC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EA4DCBF0-E4A6-4176-A416-897CA90F82A2} = {B15EF00C-302A-4BF5-9FBA-5C452544BE3A}
+		{C4B7E91B-B70A-48D7-85BA-617D02C81CC6} = {B26D0ED8-DA41-447E-ABAB-D3714F555AF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76874847-A2F3-4F30-A4E1-2E402B057C88}
