@@ -1,14 +1,11 @@
-﻿using Microsoft.Extensions.Options;
-using System.Text.Json;
-using Threads.NET.Sdk.Exceptions;
+﻿using Threads.NET.Sdk.Exceptions;
 
 namespace Threads.NET.Sdk.Authentication;
 
 internal sealed class AuthenticationClient(
-    IHttpClientFactory httpClientFactory,
+    HttpClient client,
     IOptions<ThreadsClientOptions> options) : IAuthenticationClient
 {
-    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ThreadsClientOptions _options = options.Value;
 
     public string GetAuthorizationUrl(IEnumerable<string> scopes, string? state = null)
@@ -28,7 +25,7 @@ internal sealed class AuthenticationClient(
         }
 
         var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
-        return $"https://threads.net/oauth/authorize?{queryString}";
+        return $"https://threads.net/oauth/authorize?{queryString}"; // TODO: to constants
     }
 
     public async Task<AuthenticationResult> ExchangeCodeForTokenAsync(string code)
@@ -42,8 +39,7 @@ internal sealed class AuthenticationClient(
             ["redirect_uri"] = _options.RedirectUri
         });
 
-        using var client = _httpClientFactory.CreateClient("ThreadsAuth");
-        var response = await client.PostAsync("https://graph.threads.net/oauth/access_token", content);
+        var response = await client.PostAsync("oauth/access_token", content);
         var responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -63,7 +59,6 @@ internal sealed class AuthenticationClient(
             ["access_token"] = accessToken
         };
 
-        using var client = _httpClientFactory.CreateClient("ThreadsAuth");
         var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
         var response = await client.GetAsync($"access_token?{queryString}");
         var responseContent = await response.Content.ReadAsStringAsync();
@@ -84,7 +79,6 @@ internal sealed class AuthenticationClient(
             ["access_token"] = longLivedToken
         };
 
-        using var client = _httpClientFactory.CreateClient("ThreadsAuth");
         var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
         var response = await client.GetAsync($"refresh_access_token?{queryString}");
         var responseContent = await response.Content.ReadAsStringAsync();

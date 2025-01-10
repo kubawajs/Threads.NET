@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 public class LongLivedTokenResult(string AccessToken, string TokenType, int ExpiresIn)
 {
     [JsonPropertyName("access_token")]

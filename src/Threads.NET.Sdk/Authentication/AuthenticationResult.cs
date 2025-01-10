@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Threads.NET.Sdk.Authentication;
+﻿namespace Threads.NET.Sdk.Authentication;
 
 public record AuthenticationResult(string AccessToken, long UserId)
 {
