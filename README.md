@@ -1,12 +1,15 @@
 # Threads.NET
 
+[![Publish NuGet Package](https://github.com/kubawajs/Threads.NET/actions/workflows/publish-nuget.yml/badge.svg)](https://github.com/kubawajs/Threads.NET/actions/workflows/publish-nuget.yml)
+![NuGet Version](https://img.shields.io/nuget/vpre/Threads.NET.Sdk?logo=nuget&labelColor=%23004880)
+
 A .NET SDK that simplifies interaction with the Meta Threads API, enabling developers to integrate Threads features into their .NET applications.
 
 ## Features
 
 - [ ] Authorization
 - Posts
-    - [ ] Create single thread post
+    - [ ] Create a single thread post
     - [ ] Create carousel post
 
 In progress...
