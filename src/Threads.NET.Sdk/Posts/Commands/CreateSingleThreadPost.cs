@@ -10,7 +10,7 @@ internal sealed record CreateSingleThreadPost(
     string Text,
     string AccessToken,
     string UserId)
-    : IAuthorizedCommand, IRequest<CreateSingleThreadPostResponse>
+    : IAuthorizedRequest<CreateSingleThreadPostResponse>
 {
     public string AccessToken { get; } = AccessToken;
 

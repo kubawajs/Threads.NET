@@ -2,26 +2,17 @@
 using Threads.NET.Sdk.Posts.Responses;
 
 namespace Threads.NET.Sdk.Posts.Commands.Handlers;
-internal sealed class CreateSingleThreadPostHandler(HttpClient httpClient)
+internal sealed class CreateSingleThreadPostHandler(IHttpClientFactory httpClientFactory)
     : IRequestHandler<CreateSingleThreadPost, CreateSingleThreadPostResponse>
 {
-    private static readonly string[] value = ["threads_basic", "threads_content_publish "]; // TODO: to constants
-    private const string _apiVersion = "v1.0"; // TODO: to constants
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient("Threads");
 
     public async Task<CreateSingleThreadPostResponse> Handle(CreateSingleThreadPost request, CancellationToken cancellationToken)
     {
-        var path = $"/{_apiVersion}/{request.UserId}/threads";
-        var content = new FormUrlEncodedContent(new Dictionary<string, string>
-        {
-            ["is_carousel_item "] = request.IsCarouselItem.ToString(),
-            ["image_url"] = request.ImageUrl,
-            ["media_type"] = request.MediaType.ToString(),
-            ["video_url"] = request.VideoUrl,
-            ["text"] = request.Text,
-            ["access_token"] = request.AccessToken,
-        });
+        var path = $"/{Constants.ApiVersion}/{request.UserId}/threads";
+        var content = new FormUrlEncodedContent(CreatePostParameters(request));
 
-        var response = await httpClient.PostAsync(path, content);
+        var response = await _httpClient.PostAsync(path, content);
         var responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -29,6 +20,18 @@ internal sealed class CreateSingleThreadPostHandler(HttpClient httpClient)
             throw new ThreadsInvalidResponseCodeException(response.StatusCode, responseContent);
         }
 
-        return JsonSerializer.Deserialize<CreateSingleThreadPostResponse>(responseContent);
+        var deserializedResponse = JsonSerializer.Deserialize<CreateSingleThreadPostResponse>(responseContent);
+        return deserializedResponse is not null ? deserializedResponse : throw new ThreadsDeserializationException(typeof(CreateSingleThreadPost), responseContent);
     }
+
+    private static Dictionary<string, string> CreatePostParameters(CreateSingleThreadPost request) =>
+        new()
+        {
+            ["is_carousel_item"] = request.IsCarouselItem.ToString().ToLowerInvariant(),
+            ["image_url"] = request.ImageUrl ?? string.Empty,
+            ["media_type"] = request.MediaType.ToString().ToLowerInvariant(),
+            ["video_url"] = request.VideoUrl ?? string.Empty,
+            ["text"] = request.Text ?? string.Empty,
+            ["access_token"] = request.AccessToken
+        };
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Threads.NET.Sdk;
 using Threads.NET.Sdk.Authentication;
+using Threads.NET.Sdk.Client;
 
 public static class ServiceCollectionExtensions
 {
@@ -10,14 +11,17 @@ public static class ServiceCollectionExtensions
     {
         services.Configure(configureOptions);
 
-        services.AddHttpClient<IAuthenticationClient, AuthenticationClient>((serviceProvider, client) =>
+        services.AddHttpClient("Threads", (serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<ThreadsClientOptions>>().Value;
 
-            client.BaseAddress = new Uri("https://graph.threads.net/");
+            client.BaseAddress = new Uri(Constants.ApiUrl);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.Timeout = options.HttpTimeout;
         });
+
+        services.AddScoped<IThreadsAuthenticationClient, ThreadsAuthenticationClient>();
+        services.AddScoped<IThreadsClient, ThreadsClient>();
 
         return services;
     }

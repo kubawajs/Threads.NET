@@ -1,6 +1,7 @@
 ﻿namespace Threads.NET.Sdk.Posts.Commands;
 
-internal interface IAuthorizedCommand
+// TODO: to be moved in more generic place
+internal interface IAuthorizedRequest<out TResponse> : IRequest<TResponse>
 {
     /// <summary>
     /// Access token used for validation.

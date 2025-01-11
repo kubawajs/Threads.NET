@@ -2,11 +2,12 @@
 
 namespace Threads.NET.Sdk.Authentication;
 
-internal sealed class AuthenticationClient(
-    HttpClient client,
-    IOptions<ThreadsClientOptions> options) : IAuthenticationClient
+internal sealed class ThreadsAuthenticationClient(
+    IHttpClientFactory httpClientFactory,
+    IOptions<ThreadsClientOptions> options) : IThreadsAuthenticationClient
 {
     private readonly ThreadsClientOptions _options = options.Value;
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient("Threads");
 
     public string GetAuthorizationUrl(IEnumerable<string> scopes, string? state = null)
     {
@@ -39,7 +40,7 @@ internal sealed class AuthenticationClient(
             ["redirect_uri"] = _options.RedirectUri
         });
 
-        var response = await client.PostAsync("oauth/access_token", content);
+        var response = await _httpClient.PostAsync("oauth/access_token", content);
         var responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -47,7 +48,10 @@ internal sealed class AuthenticationClient(
             throw new ThreadsAuthenticationException(responseContent);
         }
 
-        return JsonSerializer.Deserialize<AuthenticationResult>(responseContent);
+        var authenticationResult = JsonSerializer.Deserialize<AuthenticationResult>(responseContent);
+        return authenticationResult is null
+            ? throw new ThreadsDeserializationException(typeof(AuthenticationResult), responseContent)
+            : authenticationResult;
     }
 
     public async Task<LongLivedTokenResult> ExchangeForLongLivedTokenAsync(string accessToken)
@@ -60,7 +64,7 @@ internal sealed class AuthenticationClient(
         };
 
         var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
-        var response = await client.GetAsync($"access_token?{queryString}");
+        var response = await _httpClient.GetAsync($"access_token?{queryString}");
         var responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -68,7 +72,10 @@ internal sealed class AuthenticationClient(
             throw new ThreadsAuthenticationException(responseContent);
         }
 
-        return JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
+        var tokenResult = JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
+        return tokenResult is null
+            ? throw new ThreadsDeserializationException(typeof(LongLivedTokenResult), responseContent)
+            : tokenResult;
     }
 
     public async Task<LongLivedTokenResult> RefreshLongLivedTokenAsync(string longLivedToken)
@@ -80,7 +87,7 @@ internal sealed class AuthenticationClient(
         };
 
         var queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
-        var response = await client.GetAsync($"refresh_access_token?{queryString}");
+        var response = await _httpClient.GetAsync($"refresh_access_token?{queryString}");
         var responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -88,6 +95,9 @@ internal sealed class AuthenticationClient(
             throw new ThreadsAuthenticationException(responseContent);
         }
 
-        return JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
+        var tokenResult = JsonSerializer.Deserialize<LongLivedTokenResult>(responseContent);
+        return tokenResult is null
+            ? throw new ThreadsDeserializationException(typeof(LongLivedTokenResult), responseContent)
+            : tokenResult;
     }
 }

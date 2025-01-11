@@ -4,7 +4,12 @@ A .NET SDK that simplifies interaction with the Meta Threads API, enabling devel
 
 ## Features
 
-TODO
+- [ ] Authorization
+- Posts
+    - [ ] Create single thread post
+    - [ ] Create carousel post
+
+In progress...
 
 ---
 
