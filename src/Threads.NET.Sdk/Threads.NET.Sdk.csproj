@@ -1,5 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageTags>threads;meta;sdk;dotnet;.net;dotnet;netcore;core;</PackageTags>
+    <PackageProjectUrl>https://github.com/kubawajs/Threads.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kubawajs/Threads.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.Extensions.Http" />

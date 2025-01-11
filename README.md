@@ -21,7 +21,7 @@ In progress...
 Install the SDK via NuGet:
 
 ```bash
-TODO
+dotnet add package Threads.NET.Sdk
 ```
 
 ---

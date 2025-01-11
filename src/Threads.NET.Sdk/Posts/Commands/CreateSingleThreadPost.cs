@@ -1,8 +1,6 @@
-﻿using Threads.NET.Sdk.Posts.Responses;
+﻿namespace Threads.NET.Sdk.Posts.Commands;
 
-namespace Threads.NET.Sdk.Posts.Commands;
-
-internal sealed record CreateSingleThreadPost(
+public sealed record CreateSingleThreadPost(
     bool IsCarouselItem,
     string ImageUrl,
     SingleThreadPostMediaType MediaType,

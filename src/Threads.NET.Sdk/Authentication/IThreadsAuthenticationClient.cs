@@ -1,6 +1,6 @@
 ﻿namespace Threads.NET.Sdk.Authentication;
 
-internal interface IThreadsAuthenticationClient
+public interface IThreadsAuthenticationClient
 {
     /// <summary>
     /// Generates the authorization URL for the OAuth flow.
@@ -14,7 +14,7 @@ internal interface IThreadsAuthenticationClient
     /// Exchanges the authorization code for an access token.
     /// </summary>
     /// <param name="code">The authorization code received from the OAuth redirect.</param>
-    /// <returns>Authentication result containing the access token and related information.</returns>
+    /// <returns>Authentication result containing the access token and User ID.</returns>
     Task<AuthenticationResult> ExchangeCodeForTokenAsync(string code);
 
     /// <summary>

@@ -3,7 +3,7 @@
 /// <summary>
 /// Indicates the current media type.
 /// </summary>
-internal enum SingleThreadPostMediaType
+public enum SingleThreadPostMediaType
 {
     TEXT,
     IMAGE,

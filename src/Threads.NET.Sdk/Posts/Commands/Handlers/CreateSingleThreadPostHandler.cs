@@ -1,5 +1,4 @@
 ﻿using Threads.NET.Sdk.Exceptions;
-using Threads.NET.Sdk.Posts.Responses;
 
 namespace Threads.NET.Sdk.Posts.Commands.Handlers;
 internal sealed class CreateSingleThreadPostHandler(IHttpClientFactory httpClientFactory)
