@@ -1,5 +1,10 @@
 <Project>
   <PropertyGroup>
+    <Authors>Jakub Wajs</Authors>
+    <Description>Threads .NET SDK</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>

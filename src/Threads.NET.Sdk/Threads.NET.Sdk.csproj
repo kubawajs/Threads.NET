@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Description>Threads .NET SDK</Description>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.Extensions.Http" />
