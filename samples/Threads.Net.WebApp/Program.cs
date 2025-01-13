@@ -12,7 +12,7 @@ builder.Services.AddThreadsClient(options =>
     options.ClientId = builder.Configuration["Threads:ClientId"] ?? "";
     options.ClientSecret = builder.Configuration["Threads:ClientSecret"] ?? "";
     options.HttpTimeout = TimeSpan.FromSeconds(int.Parse(builder.Configuration["Threads:HttpTimeout"] ?? ""));
-    options.RedirectUri = "https://localhost/";
+    options.RedirectUri = builder.Configuration["Threads:RedirectUri"] ?? "";
 });
 
 var app = builder.Build();
