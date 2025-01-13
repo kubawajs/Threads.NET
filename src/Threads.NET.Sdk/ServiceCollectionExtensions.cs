@@ -23,6 +23,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IThreadsAuthenticationClient, ThreadsAuthenticationClient>();
         services.AddScoped<IThreadsClient, ThreadsClient>();
 
+        // Add MediatR
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
         return services;
     }
 }

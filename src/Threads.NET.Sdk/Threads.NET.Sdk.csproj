@@ -24,6 +24,7 @@
     <Using Include="MediatR" />
     <Using Include="Microsoft.Extensions.Options" />
     <Using Include="System.Net" />
+    <Using Include="System.Reflection" />
     <Using Include="System.Text.Json" />
     <Using Include="System.Text.Json.Serialization" />
   </ItemGroup>

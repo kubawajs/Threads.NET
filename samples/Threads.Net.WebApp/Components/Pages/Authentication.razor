@@ -1,0 +1,22 @@
+﻿@page "/authentication"
+@using Threads.NET.Sdk.Client
+@rendermode InteractiveServer
+
+@inject IThreadsClient threadsClient
+@inject NavigationManager navigationMgr
+
+<PageTitle>Authentication</PageTitle>
+
+<h1>Authentication</h1>
+
+<p role="status">Authenticate in Threads application.</p>
+
+<button class="btn btn-primary" @onclick="AuthenticateUser">Authenticate</button>
+
+@code {
+    private void AuthenticateUser()
+    {
+        var authorizationUrl = threadsClient.GetAuthorizationUrl(["threads_content_publish"]);
+        navigationMgr.NavigateTo(authorizationUrl);
+    }
+}
