@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Threads.Net.WebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddThreadsClient(options =>
 {
@@ -32,5 +35,20 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapGet("auth/callback", ([FromQuery] string? code, IHttpContextAccessor httpContextAccessor) =>
+{
+    if (!string.IsNullOrEmpty(code))
+    {
+        // Set the code in an HttpOnly cookie
+        httpContextAccessor.HttpContext?.Response.Cookies.Append("access_code", code, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict
+        });
+    }
+    return Results.Redirect("/authentication");
+});
 
 app.Run();

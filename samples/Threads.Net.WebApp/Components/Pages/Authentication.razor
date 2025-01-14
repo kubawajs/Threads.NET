@@ -4,6 +4,7 @@
 
 @inject IThreadsClient threadsClient
 @inject NavigationManager navigationMgr
+@inject IHttpContextAccessor httpContextAccessor
 
 <PageTitle>Authentication</PageTitle>
 
@@ -11,12 +12,33 @@
 
 <p role="status">Authenticate in Threads application.</p>
 
-<button class="btn btn-primary" @onclick="AuthenticateUser">Authenticate</button>
+<button class="btn btn-primary" disabled="@IsAuthenticated" @onclick="AuthenticateUser">Authenticate</button>
+@if (IsAuthenticated)
+{
+    <p>User authenticated.</p>
+}
 
 @code {
+    public string? Code { get; set; }
+    public bool IsAuthenticated { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var accessCode = httpContextAccessor.HttpContext?.Request.Cookies["access_code"];
+        if (!string.IsNullOrEmpty(accessCode))
+        {
+            Code = accessCode;
+            IsAuthenticated = true;
+        }
+        else
+        {
+            IsAuthenticated = false;
+        }
+    }
+
     private void AuthenticateUser()
     {
-        var authorizationUrl = threadsClient.GetAuthorizationUrl(["threads_content_publish"]);
+        var authorizationUrl = threadsClient.GetAuthorizationUrl(["threads_basic", "threads_content_publish"]);
         navigationMgr.NavigateTo(authorizationUrl);
     }
 }
