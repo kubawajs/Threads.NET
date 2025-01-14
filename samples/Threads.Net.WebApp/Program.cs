@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Threads.Net.WebApp.Components;
+using Threads.Net.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,6 @@ builder.Services
     .AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpContextAccessor();
-
 builder.Services.AddThreadsClient(options =>
 {
     options.ClientId = builder.Configuration["Threads:ClientId"] ?? "";
@@ -17,6 +16,8 @@ builder.Services.AddThreadsClient(options =>
     options.HttpTimeout = TimeSpan.FromSeconds(int.Parse(builder.Configuration["Threads:HttpTimeout"] ?? ""));
     options.RedirectUri = builder.Configuration["Threads:RedirectUri"] ?? "";
 });
+
+builder.Services.AddSingleton<AuthService>(); // TODO: Temporary register as singleton to share between components.
 
 var app = builder.Build();
 
@@ -36,17 +37,11 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapGet("auth/callback", ([FromQuery] string? code, IHttpContextAccessor httpContextAccessor) =>
+app.MapGet("auth/callback", ([FromQuery] string? code, AuthService authService) =>
 {
     if (!string.IsNullOrEmpty(code))
     {
-        // Set the code in an HttpOnly cookie
-        httpContextAccessor.HttpContext?.Response.Cookies.Append("access_code", code, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict
-        });
+        authService.Code = code;
     }
     return Results.Redirect("/authentication");
 });

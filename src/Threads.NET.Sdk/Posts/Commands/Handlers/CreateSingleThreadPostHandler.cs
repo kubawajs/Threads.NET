@@ -8,7 +8,7 @@ internal sealed class CreateSingleThreadPostHandler(IHttpClientFactory httpClien
 
     public async Task<CreateSingleThreadPostResponse> Handle(CreateSingleThreadPost request, CancellationToken cancellationToken)
     {
-        var path = $"/{Constants.ApiVersion}/{request.UserId}/threads";
+        var path = $"{Constants.ApiVersion}/{request.UserId}/threads";
         var content = new FormUrlEncodedContent(CreatePostParameters(request));
 
         var response = await _httpClient.PostAsync(path, content);

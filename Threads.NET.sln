@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threads.NET.Sdk.Tests", "te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D4AB218E-5461-4729-8C37-A0FAC6C44E40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.Net.WebApp", "samples\Threads.Net.WebApp\Threads.Net.WebApp.csproj", "{7E7726D5-3E9C-447C-8DB2-C1F0505DAB99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threads.Net.WebApp", "samples\Threads.Net.WebApp\Threads.Net.WebApp.csproj", "{7E7726D5-3E9C-447C-8DB2-C1F0505DAB99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
