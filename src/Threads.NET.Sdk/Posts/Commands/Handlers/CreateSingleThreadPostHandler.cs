@@ -23,14 +23,13 @@ internal sealed class CreateSingleThreadPostHandler(IHttpClientFactory httpClien
         return deserializedResponse is not null ? deserializedResponse : throw new ThreadsDeserializationException(typeof(CreateSingleThreadPost), responseContent);
     }
 
-    private static Dictionary<string, string> CreatePostParameters(CreateSingleThreadPost request) =>
-        new()
-        {
-            ["is_carousel_item"] = request.IsCarouselItem.ToString().ToLowerInvariant(),
-            ["image_url"] = request.ImageUrl ?? string.Empty,
-            ["media_type"] = request.MediaType.ToString().ToLowerInvariant(),
-            ["video_url"] = request.VideoUrl ?? string.Empty,
-            ["text"] = request.Text ?? string.Empty,
-            ["access_token"] = request.AccessToken
-        };
+    private static Dictionary<string, string> CreatePostParameters(CreateSingleThreadPost request)
+        => new CreateSingleThreadPostParametersBuilder()
+        .AddIsCarouselItem(request.IsCarouselItem)
+        .AddImageUrl(request.ImageUrl)
+        .AddMediaType(request.MediaType)
+        .AddVideoUrl(request.VideoUrl)
+        .AddText(request.Text)
+        .AddAccessToken(request.AccessToken)
+        .Build();
 }
