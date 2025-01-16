@@ -39,7 +39,17 @@ TODO
 
 ## Configuration
 
-TODO
+Register the client to enable interaction with the Meta Threads API. This configuration sets up the necessary options for the client, including the client ID, client secret, HTTP timeout, and redirect URI.
+
+```charp
+builder.Services.AddThreadsClient(options =>
+{
+    options.ClientId = "";
+    options.ClientSecret = "";
+    options.HttpTimeout = TimeSpan.FromSeconds(60));
+    options.RedirectUri = "";
+});
+```
 
 ## Contributing
 
