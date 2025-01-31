@@ -1,5 +1,5 @@
 ﻿using Threads.NET.Sdk.Authentication;
-using Threads.NET.Sdk.Posts.Commands;
+using Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
 namespace Threads.NET.Sdk.Client;
 

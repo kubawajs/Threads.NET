@@ -10,11 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
     <PackageReference Include="NUnit" />
-    <PackageReference Include="NUnit.Analyzers" />
+    <PackageReference Include="NUnit.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="Shouldly" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Moq" />
+    <Using Include="Moq.Protected" />
     <Using Include="NUnit.Framework" />
+    <Using Include="Shouldly" />
+    <Using Include="System.Net" />
+    <Using Include="System.Text.Json" />
+    <Using Include="System.Web" />
   </ItemGroup>
 
 </Project>
+ 

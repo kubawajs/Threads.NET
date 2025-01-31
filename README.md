@@ -7,8 +7,8 @@ A .NET SDK that simplifies interaction with the Meta Threads API, enabling devel
 
 ## Features
 
-- [ ] Authorization
-- Posts
+- [x] Authorization
+- [ ] Posts
     - [ ] Create a single thread post
     - [ ] Create carousel post
 

@@ -1,6 +1,7 @@
 ﻿using Threads.NET.Sdk.Exceptions;
 
-namespace Threads.NET.Sdk.Posts.Commands.Handlers;
+namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
+
 internal sealed class CreateSingleThreadPostHandler(IHttpClientFactory httpClientFactory)
     : IRequestHandler<CreateSingleThreadPost, CreateSingleThreadPostResponse>
 {

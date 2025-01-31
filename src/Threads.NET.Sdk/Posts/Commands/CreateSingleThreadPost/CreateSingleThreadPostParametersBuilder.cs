@@ -1,4 +1,4 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands.Handlers;
+﻿namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
 public class CreateSingleThreadPostParametersBuilder
 {
@@ -6,7 +6,7 @@ public class CreateSingleThreadPostParametersBuilder
 
     public CreateSingleThreadPostParametersBuilder AddIsCarouselItem(bool isCarouselItem)
     {
-        if(isCarouselItem)
+        if (isCarouselItem)
         {
             _parameters.Add("is_carousel_item", true.ToString());
         }

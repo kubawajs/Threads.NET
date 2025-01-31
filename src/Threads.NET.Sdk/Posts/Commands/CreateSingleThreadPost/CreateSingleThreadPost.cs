@@ -1,4 +1,4 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands;
+﻿namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
 public sealed record CreateSingleThreadPost(
     bool IsCarouselItem,
