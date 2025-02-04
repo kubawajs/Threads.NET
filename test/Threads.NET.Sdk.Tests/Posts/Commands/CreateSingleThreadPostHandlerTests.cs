@@ -33,7 +33,7 @@ public class CreateSingleThreadPostHandlerTests
     public async Task Handle_ShouldReturnDeserializedResponse_WhenRequestIsSuccessful()
     {
         // Arrange
-        var request = new CreateSingleThreadPost(
+        var request = new CreateSingleThreadPostRequest(
             IsCarouselItem: false,
             ImageUrl: "https://example.com/image.jpg",
             MediaType: SingleThreadPostMediaType.IMAGE,
@@ -75,7 +75,7 @@ public class CreateSingleThreadPostHandlerTests
     public void Handle_ShouldThrowThreadsInvalidResponseCodeException_WhenResponseIsNotSuccessful()
     {
         // Arrange
-        var request = new CreateSingleThreadPost(
+        var request = new CreateSingleThreadPostRequest(
             IsCarouselItem: false,
             ImageUrl: "https://example.com/image.jpg",
             MediaType: SingleThreadPostMediaType.IMAGE,
@@ -101,17 +101,14 @@ public class CreateSingleThreadPostHandlerTests
             });
 
         // Act & Assert
-        Should.Throw<ThreadsInvalidResponseCodeException>(async () =>
-        {
-            await _handler.Handle(request, CancellationToken.None);
-        }).Message.ShouldContain(responseContent);
+        Should.Throw<ThreadsInvalidResponseCodeException>(async () => await _handler.Handle(request, CancellationToken.None)).Message.ShouldContain(responseContent);
     }
 
     [Test]
     public void Handle_ShouldThrowThreadsDeserializationException_WhenResponseCannotBeDeserialized()
     {
         // Arrange
-        var request = new CreateSingleThreadPost(
+        var request = new CreateSingleThreadPostRequest(
             IsCarouselItem: false,
             ImageUrl: "https://example.com/image.jpg",
             MediaType: SingleThreadPostMediaType.IMAGE,
@@ -144,7 +141,7 @@ public class CreateSingleThreadPostHandlerTests
     public async Task Handle_ShouldIncludeCorrectParametersInRequest_WhenRequestIsValid()
     {
         // Arrange
-        var request = new CreateSingleThreadPost(
+        var request = new CreateSingleThreadPostRequest(
             IsCarouselItem: true,
             ImageUrl: "https://example.com/image.jpg",
             MediaType: SingleThreadPostMediaType.IMAGE,

@@ -1,6 +1,6 @@
 ﻿namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
-public class CreateSingleThreadPostParametersBuilder
+internal sealed class CreateSingleThreadPostParametersBuilder
 {
     private readonly Dictionary<string, string> _parameters = [];
 
@@ -18,7 +18,7 @@ public class CreateSingleThreadPostParametersBuilder
     {
         if (!string.IsNullOrWhiteSpace(imageUrl))
         {
-            _parameters.Add("image_url", imageUrl);
+            _parameters.Add("image_url", imageUrl!);
         }
 
         return this;
@@ -38,7 +38,7 @@ public class CreateSingleThreadPostParametersBuilder
     {
         if (!string.IsNullOrWhiteSpace(videoUrl))
         {
-            _parameters.Add("video_url", videoUrl);
+            _parameters.Add("video_url", videoUrl!);
         }
 
         return this;
@@ -48,7 +48,7 @@ public class CreateSingleThreadPostParametersBuilder
     {
         if (!string.IsNullOrWhiteSpace(text))
         {
-            _parameters.Add("text", text);
+            _parameters.Add("text", text!);
         }
 
         return this;
@@ -58,7 +58,7 @@ public class CreateSingleThreadPostParametersBuilder
     {
         if (!string.IsNullOrWhiteSpace(accessToken))
         {
-            _parameters.Add("access_token", accessToken);
+            _parameters.Add("access_token", accessToken!);
         }
 
         return this;

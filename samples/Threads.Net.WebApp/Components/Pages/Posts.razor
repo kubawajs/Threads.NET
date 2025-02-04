@@ -45,7 +45,7 @@
     {
         var accessToken = authService.Token;
         var userId = authService.UserId.ToString();
-        var request = new CreateSingleThreadPost(false, string.Empty, SingleThreadPostMediaType.TEXT, string.Empty, Post?.Text, accessToken, userId);
+        var request = new CreateSingleThreadPostRequest(false, string.Empty, SingleThreadPostMediaType.TEXT, string.Empty, Post?.Text, accessToken, userId);
         var response = await threadsClient.CreateSingleThreadPostAsync(request);
         ContainerId = response.PostId;
     }

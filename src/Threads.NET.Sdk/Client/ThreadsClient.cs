@@ -1,5 +1,6 @@
 ﻿using Threads.NET.Sdk.Authentication;
 using Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
+using Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
 
 namespace Threads.NET.Sdk.Client;
 
@@ -19,6 +20,9 @@ internal sealed class ThreadsClient(IMediator mediator, IThreadsAuthenticationCl
     public async Task<LongLivedTokenResult> RefreshLongLivedTokenAsync(string longLivedToken)
         => await authenticationClient.RefreshLongLivedTokenAsync(longLivedToken);
 
-    public async Task<CreateSingleThreadPostResponse> CreateSingleThreadPostAsync(CreateSingleThreadPost request)
+    public async Task<CreateSingleThreadPostResponse> CreateSingleThreadPostAsync(CreateSingleThreadPostRequest request)
+        => await mediator.Send(request);
+
+    public async Task<PublishMediaContainerResponse> PublishMediaContainerAsync(PublishMediaContainerRequest request)
         => await mediator.Send(request);
 }
