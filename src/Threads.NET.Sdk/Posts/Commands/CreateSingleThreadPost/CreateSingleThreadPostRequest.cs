@@ -1,5 +1,8 @@
 ﻿namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
+/// <summary>
+/// Use the POST /{threads-user-id}/threads endpoint to create a Threads media container.
+/// </summary>
 public sealed record CreateSingleThreadPostRequest(
     bool IsCarouselItem,
     string ImageUrl,

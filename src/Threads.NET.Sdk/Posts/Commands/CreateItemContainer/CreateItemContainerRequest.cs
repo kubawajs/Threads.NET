@@ -1,5 +1,8 @@
 ﻿namespace Threads.NET.Sdk.Posts.Commands.CreateItemContainer;
 
+/// <summary>
+/// Use the POST /{threads-user-id}/threads endpoint to create an item container for the image or video that will appear in a carousel.
+/// </summary>
 public sealed class CreateItemContainerRequest(
     string ImageUrl,
     ItemContainerMediaType MediaType,
