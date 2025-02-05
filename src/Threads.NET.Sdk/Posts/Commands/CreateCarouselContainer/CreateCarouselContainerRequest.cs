@@ -1,4 +1,6 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands.CreateCarouselContainer;
+﻿using Threads.NET.Sdk.Authorization;
+
+namespace Threads.NET.Sdk.Posts.Commands.CreateCarouselContainer;
 
 /// <summary>
 /// Use the POST /{threads-user-id}/threads endpoint to create a carousel container.

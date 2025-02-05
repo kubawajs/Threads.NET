@@ -21,10 +21,6 @@
     <PackageReference Include="Microsoft.Extensions.Http" />
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Posts\Queries\Handlers\" />
-  </ItemGroup>
 
   <ItemGroup>
     <Using Include="MediatR" />
@@ -33,6 +29,10 @@
     <Using Include="System.Reflection" />
     <Using Include="System.Text.Json" />
     <Using Include="System.Text.Json.Serialization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Posts\Queries\" />
   </ItemGroup>
 
 </Project>

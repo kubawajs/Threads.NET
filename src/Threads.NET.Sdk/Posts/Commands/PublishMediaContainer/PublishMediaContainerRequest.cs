@@ -1,4 +1,6 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
+﻿using Threads.NET.Sdk.Authorization;
+
+namespace Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
 
 /// <summary>
 /// Use the POST /{threads-user-id}/threads_publish endpoint to publish the container ID

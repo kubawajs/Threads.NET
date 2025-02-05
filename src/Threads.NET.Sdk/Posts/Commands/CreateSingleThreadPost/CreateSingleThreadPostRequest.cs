@@ -1,4 +1,6 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
+﻿using Threads.NET.Sdk.Authorization;
+
+namespace Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 
 /// <summary>
 /// Use the POST /{threads-user-id}/threads endpoint to create a Threads media container.

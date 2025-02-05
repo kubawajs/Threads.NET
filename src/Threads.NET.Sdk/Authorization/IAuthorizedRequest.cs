@@ -1,4 +1,4 @@
-﻿namespace Threads.NET.Sdk.Posts.Commands;
+﻿namespace Threads.NET.Sdk.Authorization;
 
 // TODO: to be moved in more generic place
 internal interface IAuthorizedRequest<out TResponse> : IRequest<TResponse>

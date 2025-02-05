@@ -2,6 +2,7 @@
 using Threads.NET.Sdk.Posts.Commands.CreateItemContainer;
 using Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 using Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
+using Threads.NET.Sdk.Profiles.Queries.RetrieveUserProfile;
 
 namespace Threads.NET.Sdk.Client;
 
@@ -26,6 +27,10 @@ internal sealed class ThreadsClient(IMediator mediator, IThreadsAuthenticationCl
 
     public async Task<PublishMediaContainerResponse> PublishMediaContainerAsync(PublishMediaContainerRequest request)
         => await mediator.Send(request);
+
     public async Task<CreateItemContainerResponse> CreateItemContainerAsync(CreateItemContainerRequest request)
+        => await mediator.Send(request);
+
+    public async Task<RetrieveUserProfileResponse> RetrieveUserProfileAsync(RetrieveUserProfileRequest request)
         => await mediator.Send(request);
 }
