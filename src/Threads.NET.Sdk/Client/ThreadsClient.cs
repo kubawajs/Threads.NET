@@ -1,4 +1,5 @@
 ﻿using Threads.NET.Sdk.Authentication;
+using Threads.NET.Sdk.Posts.Commands.CreateItemContainer;
 using Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 using Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
 
@@ -24,5 +25,7 @@ internal sealed class ThreadsClient(IMediator mediator, IThreadsAuthenticationCl
         => await mediator.Send(request);
 
     public async Task<PublishMediaContainerResponse> PublishMediaContainerAsync(PublishMediaContainerRequest request)
+        => await mediator.Send(request);
+    public async Task<CreateItemContainerResponse> CreateItemContainerAsync(CreateItemContainerRequest request)
         => await mediator.Send(request);
 }
