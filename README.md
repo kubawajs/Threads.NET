@@ -9,9 +9,15 @@ A .NET SDK that simplifies interaction with the Meta Threads API, enabling devel
 
 - [x] Authorization
 - [ ] Posts
-    - [x] Create a single thread post
-    - [ ] Create carousel post
-    - [x] Publish media container
+  - [x] Create carousel container
+  - [x] Create a single thread post
+  - [x] Create item container
+  - [x] Publish media container
+- [x] Profiles
+  - [x] Retrieve user profile
+- [ ] Media
+  - [x] Retrieve single media item
+  - [ ] Retrieve all media
 
 In progress...
 

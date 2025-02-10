@@ -1,4 +1,5 @@
 ﻿using Threads.NET.Sdk.Authentication;
+using Threads.NET.Sdk.Media.Queries.RetrieveSingleMedia;
 using Threads.NET.Sdk.Posts.Commands.CreateItemContainer;
 using Threads.NET.Sdk.Posts.Commands.CreateSingleThreadPost;
 using Threads.NET.Sdk.Posts.Commands.PublishMediaContainer;
@@ -9,7 +10,6 @@ namespace Threads.NET.Sdk.Client;
 internal sealed class ThreadsClient(IMediator mediator, IThreadsAuthenticationClient authenticationClient)
     : IThreadsClient
 {
-
     public async Task<AuthenticationResult> ExchangeCodeForTokenAsync(string code)
         => await authenticationClient.ExchangeCodeForTokenAsync(code);
 
@@ -32,5 +32,8 @@ internal sealed class ThreadsClient(IMediator mediator, IThreadsAuthenticationCl
         => await mediator.Send(request);
 
     public async Task<RetrieveUserProfileResponse> RetrieveUserProfileAsync(RetrieveUserProfileRequest request)
+        => await mediator.Send(request);
+
+    public async Task<RetrieveSingleMediaResponse> RetrieveSingleMediaAsync(RetrieveSingleMediaRequest request)
         => await mediator.Send(request);
 }
