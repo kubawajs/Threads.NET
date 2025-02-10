@@ -24,7 +24,7 @@ internal sealed class CreateItemContainerParametersBuilder
         return this;
     }
 
-    public CreateItemContainerParametersBuilder AddMediaType(Enum? mediaType)
+    public CreateItemContainerParametersBuilder AddMediaType(ItemContainerMediaType? mediaType)
     {
         if (mediaType != null)
         {
