@@ -13,11 +13,12 @@ A .NET SDK that simplifies interaction with the Meta Threads API, enabling devel
   - [x] Create a single thread post
   - [x] Create item container
   - [x] Publish media container
+  - [ ] Tags and Links in Posts
 - [x] Profiles
   - [x] Retrieve user profile
-- [ ] Media
+- [x] Media
   - [x] Retrieve single media item
-  - [ ] Retrieve all media
+  - [x] Retrieve all media
 
 In progress...
 
