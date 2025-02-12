@@ -1,7 +1,4 @@
-﻿using Threads.NET.Sdk.Authorization;
-using Threads.NET.Sdk.Profiles.Queries.RetrieveUserProfile;
-
-namespace Threads.NET.Sdk.Media.Queries.RetrieveSingleMedia;
+﻿namespace Threads.NET.Sdk.Media.Queries.RetrieveSingleMedia;
 
 public sealed record RetrieveSingleMediaResponse
 {
@@ -18,7 +15,7 @@ public sealed record RetrieveSingleMediaResponse
     public string? Permalink { get; set; }
 
     [JsonPropertyName("owner")]
-    public RetrieveSingleMediaOwnerResponse? Owner { get; set; }
+    public OwnerResponse? Owner { get; set; }
 
     [JsonPropertyName("comments")]
     public string? Username { get; set; }

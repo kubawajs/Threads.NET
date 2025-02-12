@@ -1,6 +1,6 @@
 ﻿namespace Threads.NET.Sdk.Media.Queries.RetrieveSingleMedia;
 
-public sealed class RetrieveSingleMediaRequest(
+public sealed record RetrieveSingleMediaRequest(
     string MediaId,
     string AccessToken)
     : IRequest<RetrieveSingleMediaResponse>
